@@ -28,8 +28,7 @@
             "style": {
                 "type": "rect",
                 "ratio": 1.597
-            },
-            "jar": "./danmu.jar"
+            }
         },
         {
             "key": "哔哩视频",
@@ -42,12 +41,11 @@
             "key": "荐片",
             "name": "荐片｜磁力",
             "type": 3,
-            "api": "csp_JianPian",
+            "api": "csp_Jianpian",
             "playerType": 1,
             "searchable": 1,
             "quickSearch": 1,
-            "filterable": 1,
-            "ext": "http://api2.rinhome.com"
+            "filterable": 1
         },
         {
             "key": "玩偶弹幕",
@@ -63,8 +61,7 @@
                 "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt",
                 "wogg": true,
                 "danmu": true
-            },
-            "jar": "./danmu.jar"
+            }
         },
         {
             "key": "玩偶备用弹幕",
@@ -80,8 +77,7 @@
                 "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt",
                 "site": "https://wogg.xxooo.cf",
                 "danmu": true
-            },
-            "jar": "./danmu.jar"
+            }
         },
         {
             "key": "夸克玩偶弹幕",
@@ -97,8 +93,7 @@
                 "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
                 "site": "http://wobgg.run-us-west2.goorm.io",
                 "danmu": true
-            },
-            "jar": "./danmu.jar"
+            }
         },
         {
             "key": "夸克土豆弹幕",
@@ -111,10 +106,24 @@
             "ext": {
                 "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
                 "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
-                "site": "https://tudou.lvdoui.top",
+                "site": "https://yunpan.yunpay.cc",
                 "danmu": true
-            },
-            "jar": "./danmu.jar"
+            }
+        },
+        {
+            "key": "夸克多多弹幕",
+            "name": "多多｜4K弹幕",
+            "type": 3,
+            "api": "csp_Wobg",
+            "quickSearch": 1,
+            "changeable": 1,
+            "filterable": 1,
+            "ext": {
+                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
+                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
+                "site": "https://tv.yydsys.top",
+                "danmu": true
+            }
         },
         {
             "key": "夸克蜡笔弹幕",
@@ -127,10 +136,9 @@
             "ext": {
                 "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
                 "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
-                "site": "https://duopan.fun",
+                "site": "http://labipan.com",
                 "danmu": true
-            },
-            "jar": "./danmu.jar"
+            }
         },
         {
             "key": "夸克至臻弹幕",
@@ -146,8 +154,7 @@
                 "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt",
                 "site": "https://mihdr.top",
                 "danmu": true
-            },
-            "jar": "./danmu.jar"
+            }
         },
         {
             "key": "哔嘀影视",
@@ -173,8 +180,7 @@
             },
             "style": {
                 "type": "list"
-            },
-            "jar": "./danmu.jar"
+            }
         },
         {
             "key": "我的UC",
@@ -190,8 +196,7 @@
             },
             "style": {
                 "type": "list"
-            },
-            "jar": "./danmu.jar"
+            }
         },
         {
             "key": "push_agent",
@@ -206,8 +211,7 @@
                 "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
                 "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt",
                 "danmu": true
-            },
-            "jar": "./danmu.jar"
+            }
         }
     ],
     "parses": [
@@ -217,156 +221,38 @@
             "url": "Demo"
         },
         {
-            "name": "XGJ专线",
-            "type": "1",
-            "url": "http://43.248.100.147:1122/bba/json.php?url=",
-            "flag": [
-                "BBA"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
+            "name": "推荐",
+            "type": 1,
+            "url": "https://jxjson.icu/neibu.php?url=",
+            "ext": {
+                "flag": [
+                    "qq",
+                    "腾讯",
+                    "qiyi",
+                    "爱奇艺",
+                    "奇艺",
+                    "youku",
+                    "优酷",
+                    "sohu",
+                    "搜狐",
+                    "letv",
+                    "乐视",
+                    "mgtv",
+                    "芒果",
+                    "tnmb",
+                    "seven",
+                    "bilibili",
+                    "1905"
+                ],
+                "header": {
+                    "User-Agent": "okhttp/4.9.1"
+                }
             }
         },
         {
-            "name": "XMY专线",
-            "type": "1",
-            "url": "http://121.62.61.51:6888/api/?key=LHypix08ov3mx0Tyd7&url=",
-            "flag": [
-                "NBY"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "LX专线",
-            "type": "1",
-            "url": "http://llyh.xn--yi7aa.top/api/?key=5b317c16d457b31a3150d87c0a362a9e&url=",
-            "flag": [
-                "LXTX"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "DG专线",
-            "type": "1",
-            "url": "http://103.112.185.139:8989/api/?key=przwarpy6rKVZ7YA38&url=",
-            "flag": [
-                "SDLG"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "OL专线",
-            "type": "1",
-            "url": "http://110.40.39.158:5000/api/jiexi/common?Key=7idBzIqEEFyf4AYYXt&url=",
-            "flag": [
-                "BTOL"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "4K专线",
-            "type": "1",
-            "url": "http://110.42.7.182:881/api/?key=KzBLknjaz7nv2de8Yn&url=",
-            "flag": [
-                "4kvip"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "MX专线",
-            "type": "1",
-            "url": "http://110.42.7.182:881/api/?key=KzBLknjaz7nv2de8Yn&url=",
-            "flag": [
-                "m78"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "BD专线",
-            "type": "1",
-            "url": "http://zy.uiovo.com/api/?key=951b4ca48d0f8c77cd8ebbc2e784c441&ud=105&url=",
-            "flag": [
-                "nmys"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "MY专线",
-            "type": "1",
-            "url": "http://zy.uiovo.com/api/?key=951b4ca48d0f8c77cd8ebbc2e784c441&ud=105&url=",
-            "flag": [
-                "mytv"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "LL专线",
-            "type": "1",
-            "url": "http://llyh.xn--yi7aa.top/api/?key=5b317c16d457b31a3150d87c0a362a9e&url=",
-            "flag": [
-                "youku",
-                "qq",
-                "qiyi",
-                "bilibili",
-                "mgtv",
-                "pptv",
-                "xigua"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "XGJ专线",
-            "type": "1",
-            "url": "http://43.248.100.147:1122/XGJ/keyef2f3dc4asd1fd564f132asc2asd1f.php?url=",
-            "flag": [
-                "youku",
-                "qq",
-                "qiyi",
-                "bilibili",
-                "mgtv",
-                "pptv",
-                "xigua",
-                "NBY",
-                "ETH-",
-                "mytv",
-                "nmys",
-                "BTOL",
-                "caihongyun",
-                "4kvip",
-                "m78"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
-        },
-        {
-            "name": "DM专线",
-            "type": "1",
-            "url": "http://zy.uiovo.com/api/?key=951b4ca48d0f8c77cd8ebbc2e784c441&ud=105&url=",
-            "flag": [
-                "yhdm"
-            ],
-            "header": {
-                "User-Agent": "Dalvik/2.1.0"
-            }
+            "name": "推荐2",
+            "type": 1,
+            "url": "http://pan.qiaoji8.com/tvbox/neibu.php?url="
         },
         {
             "name": "线路1",
@@ -606,11 +492,29 @@
     ],
     "lives": [
         {
-            "name": "live",
+            "name": "直播1",
             "type": 0,
             "url": "./live.txt",
             "playerType": 1,
             "epg": "http://epg.112114.xyz/?ch={name}&date={date}"
+        },
+        {
+            "name": "直播2",
+            "type": 0,
+            "url": "https://live.fanmingming.com/tv/m3u/ipv6.m3u",
+            "playerType": 1
+        },
+        {
+            "name": "直播3",
+            "type": 0,
+            "url": "https://tv.iill.top/m3u/Gather",
+            "playerType": 1
+        },
+        {
+            "name": "直播4",
+            "type": 0,
+            "url": "http://mmitv.top/pltv/merization.php?id=list&user=t0k1b5&token=17af41bb&text=diypbox",
+            "playerType": 1
         }
     ],
     "flags": [
