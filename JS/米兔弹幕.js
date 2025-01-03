@@ -1,6 +1,6 @@
-globalThis.h_ost = 'http://xxsp.xxmh.top/';
-var key = CryptoJS.enc.Base64.parse("MGY3OTFiZmMwZGM2MWU4Zg==");
-var iv = CryptoJS.enc.Base64.parse("MGY3OTFiZmMwZGM2MWU4Zg==");
+globalThis.h_ost = 'http://mitu.jiajiayoutian.top/';
+var key = CryptoJS.enc.Base64.parse("ZDAzMmMxMjg3NmJjNjg0OA==");
+var iv = CryptoJS.enc.Base64.parse("ZDAzMmMxMjg3NmJjNjg0OA==");
 globalThis.AES_Decrypt = function(word) {
     try {
         var decrypt = CryptoJS.AES.decrypt(word, key, {
@@ -60,6 +60,7 @@ globalThis.vodids = function(ids) {
     });
     let html = JSON.parse(html1);
     const rdata = JSON.parse(AES_Decrypt(html.data));
+    console.log(rdata);
     const data = {
         vod_id: ids,
         vod_name: rdata.vod.vod_name,
@@ -98,54 +99,68 @@ globalThis.ssvod = function(wd) {
 }
 //解析
 globalThis.jxx = function(id, url, name, juji) {
-    /* if("741852963"!=='741852963'){
-      return 'https://s0.mall.tcl.com/group1/M00/00/89/CvoGBGdcOPaAAUxvADwZniVV2bc476.mp4';
-     }*/
-    if (id.startsWith('http')) {
+    try {
+        if (id.includes('xmflv')) {
+            return {
+                parse: 1,
+                url: id + url,
+                jx: 0,
+                danmaku: 'http://43.242.202.175:9595/nnjsdm.php?key=789456123&id=' + '&jm=' + name + '&js=' + juji + '&key=741852963'
+            };
+        }
+        //log(id); 
+        if (url.includes('m3u8')) {
+            return {
+                parse: 0,
+                url: url,
+                jx: 1,
+                danmaku: 'http://43.242.202.175:9595/nnjsdm.php?key=789456123&id=' + '&jm=' + name + '&js=' + juji + '&key=741852963'
+            };
+        }
+        if (id.includes('http')) {
+            let purl = JSON.parse(request(id + url)).url;
+            return {
+                parse: 0,
+                url: purl,
+                jx: 0,
+                danmaku: 'http://43.242.202.175:9595/nnjsdm.php?key=789456123&id=' + '&jm=' + name + '&js=' + juji + '&key=741852963'
+            };
+        }
+        let html1 = request(h_ost + 'api.php/getappapi.index/vodParse', {
+            method: 'POST',
+            headers: {
+                'User-Agent': 'okhttp/3.14.9',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: {
+                parse_api: id,
+                url: AES_Encrypt(url),
+            }
+        });
+        let html = AES_Decrypt(JSON.parse(html1).data);
+        console.log(html1);
+        let decry = html.replace(/\n/g, '').replace(/\\/g, '');
+        let matches = decry.match(/"url":"([^"]+)"/);
+        if (!matches || matches[1] === null) {
+            matches = decry.match(/"url": "([^"]+)"/);
+        }
         return {
-            parse: 1,
-            url: id + url,
+            parse: 0,
+            url: matches[1],
             jx: 0,
             danmaku: 'http://43.242.202.175:9595/nnjsdm.php?key=789456123&id=' + '&jm=' + name + '&js=' + juji + '&key=741852963'
         };
-    }
-    if (id == 0) {
+    } catch {
         return {
             parse: 0,
-            url: id + url,
-            jx: 1,
-            danmaku: 'http://43.242.202.175:9595/nnjsdm.php?key=789456123&id=' + '&jm=' + name + '&js=' + juji + '&key=741852963'
+            url: '解析失败',
+            jx: 0
         };
     }
-
-    let html1 = request(h_ost + 'api.php/getappapi.index/vodParse', {
-        method: 'POST',
-        headers: {
-            'User-Agent': 'okhttp/3.14.9',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: {
-            parse_api: id,
-            url: AES_Encrypt(url),
-        }
-    });
-    let html = AES_Decrypt(JSON.parse(html1).data);
-    console.log(html);
-    let decry = html.replace(/\n/g, '').replace(/\\/g, '');
-    let matches = decry.match(/"url":"([^"]+)"/);
-    if (!matches || matches[1] === null) {
-        matches = decry.match(/"url": "([^"]+)"/);
-    }
-    return {
-        parse: 0,
-        url: matches[1],
-        jx: 0,
-        danmaku: 'http://43.242.202.175:9595/nnjsdm.php?key=789456123&id=' + '&jm=' + name + '&js=' + juji + '&key=741852963'
-    };
 }
 
 var rule = {
-    title: '小熊',
+    title: '米兔[资]',
     host: '',
     detailUrl: 'fyid',
     searchUrl: '**',

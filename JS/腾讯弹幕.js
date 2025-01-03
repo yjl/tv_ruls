@@ -29,7 +29,43 @@ var rule = {
     limit: 20,
     // play_parse:true,
     // 手动调用解析请求json的url,此lazy不方便
-    lazy: 'js:input="https://cache.json.icu/home/api?type=ys&uid=292796&key=fnoryABDEFJNPQV269&url="+input.split("?")[0];log(input);let html=JSON.parse(request(input));log(html);input=html.url||input',
+    play_parse: true,
+    lazy: $js.toString(() => {
+        try {
+            let api = "" + input.split("?")[0];
+            console.log(api);
+            let response = fetch(api, {
+                method: 'get',
+                headers: {
+                    'User-Agent': 'okhttp/3.14.9',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+            let bata = JSON.parse(response);
+            if (bata.url.includes("qq")) {
+                input = {
+                    parse: 0,
+                    url: bata.url,
+                    jx: 0,
+                    danmaku: "http://43.242.202.175:9595/nnjsdm.php?key=789456123&id=" + input.split("?")[0]
+                };
+            } else {
+                input = {
+                    parse: 0,
+                    url: input.split("?")[0],
+                    jx: 1,
+                    danmaku: "http://43.242.202.175:9595/nnjsdm.php?key=789456123&id=" + input.split("?")[0]
+                };
+            }
+        } catch {
+            input = {
+                parse: 0,
+                url: input.split("?")[0],
+                jx: 1,
+                danmaku: "http://43.242.202.175:9595/nnjsdm.php?key=789456123&id=" + input.split("?")[0]
+            };
+        }
+    }),
     推荐: '.list_item;img&&alt;img&&src;a&&Text;a&&data-float',
     一级: '.list_item;img&&alt;img&&src;a&&Text;a&&data-float',
     二级: $js.toString(() => {
@@ -64,11 +100,11 @@ var rule = {
         if (/get_playsource/.test(input)) {
             eval(html);
             let indexList = QZOutputJson.PlaylistItem.indexList;
-            indexList.forEach(function (it) {
+            indexList.forEach(function(it) {
                 let dataUrl = "https://s.video.qq.com/get_playsource?id=" + sourceId + "&plat=2&type=4&data_type=3&range=" + it + "&video_type=10&plname=qq&otype=json";
                 eval(fetch(dataUrl, fetch_params));
                 let vdata = QZOutputJson.PlaylistItem.videoPlayList;
-                vdata.forEach(function (item) {
+                vdata.forEach(function(item) {
                     d.push({
                         title: item.title,
                         pic_url: item.pic,
@@ -93,11 +129,11 @@ var rule = {
                 for (let i = 0; i < video_lists.length; i += 30) {
                     video_list.push(video_lists.slice(i, i + 30))
                 }
-                video_list.forEach(function (it, idex) {
+                video_list.forEach(function(it, idex) {
                     let o_url = "https://union.video.qq.com/fcgi-bin/data?otype=json&tid=1804&appid=20001238&appkey=6c03bbe9658448a4&union_platform=1&idlist=" + it.join(",");
                     let o_html = fetch(o_url, fetch_params);
                     eval(o_html);
-                    QZOutputJson.results.forEach(function (it1) {
+                    QZOutputJson.results.forEach(function(it1) {
                         it1 = it1.fields;
                         let url = "https://v.qq.com/x/cover/" + cid + "/" + it1.vid + ".html";
                         d.push({
@@ -111,17 +147,17 @@ var rule = {
                 })
             }
         }
-        let yg = d.filter(function (it) {
+        let yg = d.filter(function(it) {
             return it.type && it.type !== "正片"
         });
-        let zp = d.filter(function (it) {
+        let zp = d.filter(function(it) {
             return !(it.type && it.type !== "正片")
         });
         VOD.vod_play_from = yg.length < 1 ? "qq" : "qq$$$qq 预告及花絮";
-        VOD.vod_play_url = yg.length < 1 ? d.map(function (it) {
+        VOD.vod_play_url = yg.length < 1 ? d.map(function(it) {
             return it.title + "$" + it.url
-        }).join("#") : [zp, yg].map(function (it) {
-            return it.map(function (its) {
+        }).join("#") : [zp, yg].map(function(it) {
+            return it.map(function(its) {
                 return its.title + "$" + its.url
             }).join("#")
         }).join("$$$");
@@ -134,7 +170,7 @@ var rule = {
         let html = request(input);
         let baseList = pdfa(html, "body&&.result_item_v");
         log(baseList.length);
-        baseList.forEach(function (it) {
+        baseList.forEach(function(it) {
             let longText = pdfh(it, ".result_title&&a&&Text");
             let shortText = pdfh(it, ".type&&Text");
             let fromTag = pdfh(it, ".result_source&&Text");
